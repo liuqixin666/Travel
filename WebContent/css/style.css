@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+.container{
+	width: 900px;
+	margin:0 auto;
+}
+
+.container table{
+	width:inherit;/*表格宽度继承父级容器*/
+}
+
+.title{
+	font-weight:bold;
+}
+
+.bg-gray{
+	background: #ccc;
+}
+td{
+	text-align: center;
+}
