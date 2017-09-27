@@ -18,4 +18,7 @@ public class TestTravel {
 			System.out.println(t.gettId() + "," + t.getArea() + "," + t.getFelling());
 		}
 	}
+	public void test2(){
+		
+	}
 }
