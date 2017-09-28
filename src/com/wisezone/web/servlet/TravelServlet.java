@@ -15,6 +15,8 @@ import com.wisezone.biz.TravelBiz;
 import com.wisezone.biz.impl.TravelBizImpl;
 import com.wisezone.entity.Travel;
 
+import net.sf.json.JSONObject;
+
 public class TravelServlet extends BaseServlet {
 
 	/**
@@ -30,7 +32,7 @@ public class TravelServlet extends BaseServlet {
 		
 		request.setAttribute("list", list);
 		
-		return "index.jsp";
+		return "index2.jsp";
 	}
 
 	public String delete(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -43,6 +45,39 @@ public class TravelServlet extends BaseServlet {
 			String msg = result > 0 ?"删除成功":"删除失败";
 			
 			responseScript(request, response, msg);
+			return null;
+			
+		}
+		return "message.jsp";
+	}
+	
+	public String delete_ajax(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String str_tId = request.getParameter("tId");
+		
+		response.setContentType("text/html;charset=utf-8");
+		if (null == str_tId) {
+			PrintWriter out = response.getWriter();
+			
+			JSONObject json = new JSONObject();
+			json.put("msg", "页面参数有误");
+			
+			out.print(json.toString());
+			out.flush();
+			out.close();
+		}else{
+			int tId = Integer.parseInt(str_tId);
+			int result = biz.deleteById(tId);
+			String msg = result > 0 ?"删除成功":"删除失败";
+			
+			PrintWriter out = response.getWriter();
+			
+			JSONObject json = new JSONObject();
+			json.put("msg", msg);
+			json.put("state", result > 0);
+			
+			out.print(json.toString());
+			out.flush();
+			out.close();
 			return null;
 			
 		}
@@ -89,5 +124,16 @@ public class TravelServlet extends BaseServlet {
 		}
 		return "add.jsp";
 	}
-
+	
+	public String currentTime(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		java.util.Date date = new java.util.Date();//当前系统时间
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String str = sdf.format(date);	//将时间转换成为字符串
+		
+		PrintWriter out = response.getWriter();
+		out.print(str);
+		out.flush();
+		out.close();
+		return null;
+	}
 }

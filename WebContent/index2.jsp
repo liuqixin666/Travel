@@ -33,7 +33,7 @@
 					<td>${item.time}</td>
 					<td>${item.felling}</td>
 					<td>
-						<a href="javascript:void(0);" onclick="fn_delete(${item.tId})">删除</a>
+						<a href="javascript:void(0);" onclick="fn_delete2(this)">删除</a>
 					</td>
 				</tr>
 			</c:forEach>
